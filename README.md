@@ -8,7 +8,7 @@ In this project, you will build the landing page for a podcast discovery app usi
 
 ## Core Objectives
 
-- Fetch podcast data from an API on initial page load.
+- Fetch podcast data from an API: https://podcast-api.netlify.app/ on initial page load.
 - Display a loading indicator while data is being fetched, and handle errors or empty results with a clear user message.
 - Render a responsive **grid layout** of podcast previews using modular, reusable React components.
 - Pass podcast data into components via props and render each podcast card with the following:
