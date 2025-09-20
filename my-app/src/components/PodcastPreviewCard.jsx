@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { formatDistanceToNowStrict, parseISO } from "date-fns";
 
 /**
@@ -49,17 +48,4 @@ export default function PodcastPreviewCard({ podcast, onClick }) {
 	);
 }
 
-PodcastPreviewCard.propTypes = {
-	podcast: PropTypes.shape({
-		id: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired,
-		image: PropTypes.string,
-		seasons: PropTypes.number,
-		genres: PropTypes.arrayOf(PropTypes.string),
-		updated: PropTypes.oneOfType([
-			PropTypes.string,
-			PropTypes.instanceOf(Date),
-		]),
-	}).isRequired,
-	onClick: PropTypes.func,
-};
+
