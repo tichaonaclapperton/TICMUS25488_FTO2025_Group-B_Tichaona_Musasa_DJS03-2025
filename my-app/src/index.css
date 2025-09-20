@@ -2,7 +2,7 @@
 	--bg: #f6f7fb;
 	--card: #ffffff;
 	--muted: #666;
-	--accent: #4f46e5;
+	--accent: #4c48a1;
 	--radius: 12px;
 }
 .podcast-card {
@@ -74,26 +74,52 @@ body {
 	padding: 16px;
 }
 
-.app-header h1 {
-	margin: 0 0 16px;
-	font-size: 1.6rem;
+/* Header */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between; /* keeps title left & search right */
+  align-items: center;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* subtle shadow */
 }
 
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+
 /* Loading / Error */
+/* Center loading spinner */
 .loading {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	padding: 12px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  height: 60vh; /* Take most of the viewport height */
+  gap: 12px;
 }
+
 .spinner {
-	width: 28px;
-	height: 28px;
-	border-radius: 50%;
-	border: 4px solid rgba(0, 0, 0, 0.08);
-	border-top-color: var(--accent);
-	animation: spin 1s linear infinite;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 0, 0, 0.08);
+  border-top-color: var(--accent);
+  animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
 	to {
 		transform: rotate(360deg);
@@ -194,7 +220,7 @@ body {
 	color: var(--muted);
 }
 
-/* Modal */
+
 /* Modal base */
 .modal-overlay {
 	position: fixed;
@@ -240,7 +266,7 @@ body {
 .modal-body {
 	display: flex;
 	gap: 1.5rem;
-	flex-wrap: wrap; /* responsive: stack on small screens */
+	flex-wrap: wrap; 
 }
 
 .modal-cover {
@@ -288,25 +314,30 @@ h4 {
 	font-size: 0.85rem;
 	color: #6b7280;
 }
+/* Search container under header */
 .search-container {
-	width: 100%;
-	max-width: 400px;
-	margin: 0 auto 16px;
+  background: #eef2ff; /* soft light blue, you can change */
+  padding: 12px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+}
+/* Search bar in header */
+.app-header .search-bar {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  outline: none;
+  background: #fff;
+  color: #111827;
 }
 
-.search-bar {
-	width: 100%;
-	padding: 8px 12px;
-	border: 1px solid #d1d5db;
-	border-radius: 8px;
-	font-size: 0.95rem;
-	outline: none;
-	transition: border-color 0.2s, box-shadow 0.2s;
-}
 
 .search-bar:focus {
-	border-color: var(--accent);
-	box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); /* subtle glow */
 }
 
 /* Responsive behavior */
@@ -324,14 +355,33 @@ h4 {
 		flex: 1;
 		padding-left: 12px;
 	}
+  
 }
 @media (min-width: 900px) {
 	.grid {
 		grid-template-columns: repeat(3, 1fr);
 	}
+  
 }
 @media (min-width: 1200px) {
 	.grid {
 		grid-template-columns: repeat(4, 1fr);
 	}
+}
+@media (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start; /* left align */
+    gap: 10px;
+  }
+
+  .app-header h1 {
+    font-size: 1.3rem; /* smaller title */
+  }
+
+  .app-header .search-bar {
+    max-width: 180px; /* smaller search bar */
+    font-size: 0.9rem;
+  }
+
 }
