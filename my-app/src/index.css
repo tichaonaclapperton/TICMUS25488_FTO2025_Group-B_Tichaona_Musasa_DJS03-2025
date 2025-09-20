@@ -1,68 +1,337 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	--bg: #f6f7fb;
+	--card: #ffffff;
+	--muted: #666;
+	--accent: #4f46e5;
+	--radius: 12px;
+}
+.podcast-card {
+	background: #fff;
+	border-radius: 1rem;
+	overflow: hidden;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.2s ease;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+.podcast-card:hover {
+	transform: translateY(-4px);
 }
 
+.cover {
+	width: 100%;
+	height: 180px;
+	object-fit: cover;
+}
+
+.card-content {
+	padding: 1rem;
+}
+
+.card-content h2 {
+	font-size: 1.1rem;
+}
+
+.genres {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 0.5rem 0;
+}
+
+.genre-badge {
+	background-color: #e0e7ff;
+	color: #1e3a8a;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.updated {
+	font-size: 0.8rem;
+	color: #6b7280;
+}
+
+* {
+	box-sizing: border-box;
+}
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+	margin: 0;
+	font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+		"Helvetica Neue", Arial;
+	background: var(--bg);
+	color: #111827;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Layout */
+.app-container {
+	max-width: 1200px;
+	margin: 24px auto;
+	padding: 16px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.app-header h1 {
+	margin: 0 0 16px;
+	font-size: 1.6rem;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Loading / Error */
+.loading {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px;
+}
+.spinner {
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	border: 4px solid rgba(0, 0, 0, 0.08);
+	border-top-color: var(--accent);
+	animation: spin 1s linear infinite;
+}
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+.loadingText {
+	font-size: 14px;
+	color: var(--muted);
+}
+
+.error {
+	padding: 12px;
+	border-radius: 8px;
+	background: #fee2e2;
+	color: #991b1b;
+}
+
+/* Grid */
+.grid {
+	display: grid;
+	gap: 18px;
+	grid-template-columns: repeat(1, 1fr);
+	margin-top: 12px;
+}
+
+/* Card */
+.card {
+	display: flex;
+	flex-direction: column;
+	background: var(--card);
+	border-radius: var(--radius);
+	overflow: hidden;
+	box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+	cursor: pointer;
+	transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.card:focus,
+.card:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+.coverWrap {
+	width: 100%;
+	height: 180px;
+	overflow: hidden;
+	background: #eee;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+.cover.placeholder {
+	font-size: 14px;
+	color: var(--muted);
+}
+.cardBody {
+	padding: 12px 14px;
+}
+.cardTitle {
+	font-size: 1rem;
+	margin: 0 0 8px;
+}
+.meta {
+	font-size: 0.85rem;
+	color: var(--muted);
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+.dot {
+	opacity: 0.5;
+}
+.genres {
+	margin-top: 10px;
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+.genreTag {
+	background: #eef2ff;
+	color: var(--accent);
+	padding: 6px 8px;
+	border-radius: 999px;
+	font-size: 12px;
+}
+
+/* Empty */
+.empty {
+	padding: 24px;
+	background: #fff;
+	border-radius: 12px;
+	text-align: center;
+	color: var(--muted);
+}
+
+/* Modal */
+/* Modal base */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 50;
+}
+
+.modal {
+	background: #fff;
+	border-radius: 1rem;
+	padding: 1.2rem;
+	max-width: 900px;
+	width: 90%;
+	position: relative;
+	overflow-y: auto;
+	max-height: 90vh;
+}
+
+.close-btn {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: transparent;
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+}
+
+.modal-title {
+	margin-bottom: 1.5rem;
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+/* Body layout: 2 columns */
+.modal-body {
+	display: flex;
+	gap: 1.5rem;
+	flex-wrap: wrap; /* responsive: stack on small screens */
+}
+
+.modal-cover {
+	width: 250px;
+	max-width: 100%;
+	border-radius: 0.5rem;
+}
+
+.modal-info {
+	flex: 1;
+	min-width: 200px;
+}
+
+/* Content styling */
+.description {
+	font-size: 0.95rem;
+	line-height: 1.5;
+	color: #374151;
+	margin-bottom: 1rem;
+}
+
+h4 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.genres {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin: 1rem 0;
+}
+
+.genre-badge {
+	background-color: #e0e7ff;
+	color: #1e3a8a;
+	padding: 0.25rem 0.75rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.updated {
+	font-size: 0.85rem;
+	color: #6b7280;
+}
+.search-container {
+	width: 100%;
+	max-width: 400px;
+	margin: 0 auto 16px;
+}
+
+.search-bar {
+	width: 100%;
+	padding: 8px 12px;
+	border: 1px solid #d1d5db;
+	border-radius: 8px;
+	font-size: 0.95rem;
+	outline: none;
+	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar:focus {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* Responsive behavior */
+@media (min-width: 600px) {
+	.grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.modalContent {
+		flex-direction: row;
+	}
+	.modalCover {
+		flex: 0 0 300px;
+	}
+	.modalInfo {
+		flex: 1;
+		padding-left: 12px;
+	}
+}
+@media (min-width: 900px) {
+	.grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+@media (min-width: 1200px) {
+	.grid {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }
