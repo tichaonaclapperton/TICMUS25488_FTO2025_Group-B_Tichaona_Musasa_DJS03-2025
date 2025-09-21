@@ -5,6 +5,16 @@
 	--accent: #4c48a1;
 	--radius: 12px;
 }
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+		Arial;
+	background: var(--bg);
+	color: #111827;
+}
 .podcast-card {
 	background: #fff;
 	border-radius: 1rem;
@@ -32,6 +42,7 @@
 
 .card-content h2 {
 	font-size: 1.1rem;
+	margin-top: 0;
 }
 
 .genres {
@@ -54,17 +65,7 @@
 .updated {
 	font-size: 0.8rem;
 	color: #6b7280;
-}
-
-* {
-	box-sizing: border-box;
-}
-body {
-	margin: 0;
-	font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
-		"Helvetica Neue", Arial;
-	background: var(--bg);
-	color: #111827;
+	margin-bottom: 0;
 }
 
 /* Layout */
@@ -77,47 +78,46 @@ body {
 /* Header */
 
 .app-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--accent);
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: var(--radius);
-  margin-bottom: 20px;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	background: var(--accent);
+	color: #fff;
+	padding: 12px 20px;
+	border-radius: var(--radius);
+	margin-bottom: 20px;
 
-  display: flex;
-  justify-content: space-between; /* keeps title left & search right */
-  align-items: center;
+	display: flex;
+	justify-content: space-between; /* keeps title left & search right */
+	align-items: center;
 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* subtle shadow */
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* subtle shadow */
 }
 
 .app-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: bold;
+	margin: 0;
+	font-size: 1.8rem;
+	font-weight: bold;
 }
 
-
 /* Loading / Error */
-/* Center loading spinner */
+
 .loading {
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  justify-content: center;
-  height: 60vh; /* Take most of the viewport height */
-  gap: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 60vh; /* Take most of the viewport height */
+	gap: 12px;
 }
 
 .spinner {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 4px solid rgba(0, 0, 0, 0.08);
-  border-top-color: var(--accent);
-  animation: spin 1s linear infinite;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 4px solid rgba(0, 0, 0, 0.08);
+	border-top-color: var(--accent);
+	animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -211,14 +211,6 @@ body {
 	font-size: 12px;
 }
 
-/* Empty */
-.empty {
-	padding: 24px;
-	background: #fff;
-	border-radius: 12px;
-	text-align: center;
-	color: var(--muted);
-}
 
 
 /* Modal base */
@@ -266,7 +258,7 @@ body {
 .modal-body {
 	display: flex;
 	gap: 1.5rem;
-	flex-wrap: wrap; 
+	flex-wrap: wrap;
 }
 
 .modal-cover {
@@ -316,28 +308,27 @@ h4 {
 }
 /* Search container under header */
 .search-container {
-  background: #eef2ff; /* soft light blue, you can change */
-  padding: 12px;
-  border-radius: var(--radius);
-  margin-bottom: 20px;
+	background: #eef2ff; /* soft light blue, you can change */
+	padding: 12px;
+	border-radius: var(--radius);
+	margin-bottom: 20px;
 }
 /* Search bar in header */
 .app-header .search-bar {
-  width: 100%;
-  max-width: 300px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: var(--radius);
-  font-size: 1rem;
-  outline: none;
-  background: #fff;
-  color: #111827;
+	width: 100%;
+	max-width: 300px;
+	padding: 8px 12px;
+	border: none;
+	border-radius: var(--radius);
+	font-size: 1rem;
+	outline: none;
+	background: #fff;
+	color: #111827;
 }
 
-
 .search-bar:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); /* subtle glow */
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2); /* subtle glow */
 }
 
 /* Responsive behavior */
@@ -355,13 +346,11 @@ h4 {
 		flex: 1;
 		padding-left: 12px;
 	}
-  
 }
 @media (min-width: 900px) {
 	.grid {
 		grid-template-columns: repeat(3, 1fr);
 	}
-  
 }
 @media (min-width: 1200px) {
 	.grid {
@@ -369,19 +358,18 @@ h4 {
 	}
 }
 @media (max-width: 600px) {
-  .app-header {
-    flex-direction: column;
-    align-items: flex-start; /* left align */
-    gap: 10px;
-  }
+	.app-header {
+		flex-direction: column;
+		align-items: flex-start; /* left align */
+		gap: 10px;
+	}
 
-  .app-header h1 {
-    font-size: 1.3rem; /* smaller title */
-  }
+	.app-header h1 {
+		font-size: 1.3rem; /* smaller title */
+	}
 
-  .app-header .search-bar {
-    max-width: 180px; /* smaller search bar */
-    font-size: 0.9rem;
-  }
-
+	.app-header .search-bar {
+		max-width: 180px; /* smaller search bar */
+		font-size: 0.9rem;
+	}
 }
